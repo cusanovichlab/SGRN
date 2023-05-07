@@ -1,7 +1,13 @@
 library(tidyverse)
 setwd("/path_to_script/")
 
-images = read.table("./data/TableS8.tsv",header=T)
+images = read.csv("./data/Kang_et_al_2023_Nuclear_GFP_localization_final_data.csv",header=T)
+images = images |>
+  rename(Well = Wells) |>
+  mutate(NuclearCytoplasmicIntensityRatio =
+           round((NucSegSum488Int/NucSegArea)/(CytoSegSum488Int/CytoSegArea),4)) |>
+  select(-Transfection)
+write("./data/Table_S9.txt",row.names=F,col.names=T,quote=F,sep="\t")
 
 images |>
   filter(NucSegSum488Int + CytoSegSum488Int > 500000) |>
