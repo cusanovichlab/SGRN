@@ -7,7 +7,7 @@ images = images |>
   mutate(NuclearCytoplasmicIntensityRatio =
            round((NucSegSum488Int/NucSegArea)/(CytoSegSum488Int/CytoSegArea),4)) |>
   select(-Transfection)
-write("./data/Table_S9.txt",row.names=F,col.names=T,quote=F,sep="\t")
+#write("./data/Table_S9.txt",row.names=F,col.names=T,quote=F,sep="\t")
 
 images |>
   filter(NucSegSum488Int + CytoSegSum488Int > 500000) |>
